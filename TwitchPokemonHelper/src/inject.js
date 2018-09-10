@@ -1,4 +1,4 @@
-chrome.extension.sendMessage({}, function (response) {
+browser.runtime.sendMessage({}, function (response) {
     var readyStateCheckInterval = setInterval(function () {
             if (document.readyState === "complete") {
                 clearInterval(readyStateCheckInterval);
@@ -17,6 +17,6 @@ chrome.extension.sendMessage({}, function (response) {
 function checkForImages(){
     var badgeNode = document.querySelector("img[alt='badge']");
     if(badgeNode){
-        chrome.extension.sendMessage({action: "badge"});
+        browser.runtime.sendMessage({action: "badge"});
     }
 }

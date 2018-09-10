@@ -1,26 +1,26 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
-    chrome.extension.sendMessage({action: "getActivate"}, setActivated);
-    chrome.extension.sendMessage({action: "getVolume"}, setVolume);
+    browser.runtime.sendMessage({action: "getActivate"}, setActivated);
+    browser.runtime.sendMessage({action: "getVolume"}, setVolume);
     document.getElementById("activator").onclick = toggleActivate;
     document.getElementById("volume").onclick = volumeChanged;
 });
 
 function toggleActivate(){
-    chrome.extension.sendMessage({action: "toggleActivate"}, setActivated);
+    browser.runtime.sendMessage({action: "toggleActivate"}, setActivated);
 }
 
 function volumeChanged(){
-    chrome.extension.sendMessage({action: "setVolume", volume: document.getElementById("volume").value}, setVolume);
+    browser.runtime.sendMessage({action: "setVolume", volume: document.getElementById("volume").value}, setVolume);
 }
 
 function setActivated(value){
     var activator = document.getElementById("activator");
     if(value){
-        activator.src = chrome.runtime.getURL("media/icon-enabled.png");
+        activator.src = browser.runtime.getURL("media/icon-enabled.png");
         activator.title = "Sound Enabled";
     }
     else{
-        activator.src = chrome.runtime.getURL("media/icon-disabled.png");
+        activator.src = browser.runtime.getURL("media/icon-disabled.png");
         activator.title = "Sound Disabled";
     }
 }
